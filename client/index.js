@@ -44,13 +44,13 @@ app.post('/placeorder', (req, res) => {
 			var routingKey = req.body.nation
 			var exchange = 'order_queue'
 			channel.assertExchange(exchange, 'direct', { durable: true })
-			for (let i = 0; i < 10000; i++) {
-				channel.publish(exchange, routingKey, Buffer.from(JSON.stringify(orderItem)), {
-					persistent: true
-				})
-				console.log(" [x] %s: Sent at", routingKey, new Date())
-                console.log(orderItem)
-			}
+			// for (let i = 0; i < 10000; i++) {
+			channel.publish(exchange, routingKey, Buffer.from(JSON.stringify(orderItem)), {
+				persistent: true
+			})
+			console.log(' [x] %s: Sent at', routingKey, new Date())
+			console.log(orderItem)
+			// }
 		})
 	})
 })
